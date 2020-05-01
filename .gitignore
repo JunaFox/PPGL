@@ -19,3 +19,12 @@
 /ppgl_Test/.idea/dataSources.local.xml
 # Editor-based HTTP Client requests
 /ppgl_Test/.idea/httpRequests/
+
+# Default ignored files
+/.idea/shelf/
+/.idea/workspace.xml
+# Datasource local storage ignored files
+/.idea/dataSources/
+/.idea/dataSources.local.xml
+# Editor-based HTTP Client requests
+/.idea/httpRequests/

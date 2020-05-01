@@ -42,13 +42,11 @@ namespace PPGL {
     ///
     /// \brief Stores the values for a glfw window
     ///
-    /// \param The desired width, in screen coordinates, of the window. This must be greater than zero.
-    /// \param The desired height, in screen coordinates, of the window. This must be greater than zero.
-    /// \param The initial, UTF-8 encoded window title.
-    /// \param The monitor to use for full screen mode, or NULL for windowed mode.
-    /// \param The window whose context to share resources with, or NULL to not share resources.s
-    ///
-    /// \param width window
+    /// \param width The desired width, in screen coordinates, of the window. This must be greater than zero.
+    /// \param height The desired height, in screen coordinates, of the window. This must be greater than zero.
+    /// \param title The initial, UTF-8 encoded window title.
+    /// \param monitor The monitor to use for full screen mode, or NULL for windowed mode.
+    /// \param share The window whose context to share resources with, or NULL to not share resources.
     ///
     ////////////////////////////////////////////////////////////////
     struct WindowDummy {
@@ -83,9 +81,9 @@ namespace PPGL {
         ///
         /// \brief Sets glfw window hint and creates glfw window
         ///
-        /// \param The desired width, in screen coordinates, of the window. This must be greater than zero.
-        /// \param The desired height, in screen coordinates, of the window. This must be greater than zero.
-        /// \param The initial, UTF-8 encoded window title.
+        /// \param width The desired width, in screen coordinates, of the window. This must be greater than zero.
+        /// \param height The desired height, in screen coordinates, of the window. This must be greater than zero.
+        /// \param title The initial, UTF-8 encoded window title.
         ///
         ////////////////////////////////////////////////////////////////
         void openWindow(int width, int height, const char *title);

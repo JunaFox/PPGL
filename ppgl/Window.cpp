@@ -36,7 +36,7 @@ PPGL::Window::Window() {
     if(!glfwInit()) {
         glfwGetError(&description);
         //Print exception
-        std::cout << PPGL::Exception("Window.cpp", 39, "glfwInit()",
+        std::cout << PPGL::Exception("Window.cpp", 36, "glfwInit()",
                                      description == nullptr ? "no info" : description) << std::endl;
 
         //throw exception
@@ -73,7 +73,7 @@ void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
     glfwGetError(&description);
     if(description != nullptr) {
         //Print exception
-        std::cout << PPGL::Exception("Window.cpp", 59, "glfwWindowHint()", description) << std::endl;
+        std::cout << PPGL::Exception("Window.cpp", 71, "glfwWindowHint()", description) << std::endl;
 
         //throw exception
         throw std::exception();
@@ -86,7 +86,7 @@ void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
     if(!window) {
         glfwGetError(&description);
         //Print exception
-        std::cout << PPGL::Exception("Window.cpp", 71, "glfwCreateWindow()",
+        std::cout << PPGL::Exception("Window.cpp", 83, "glfwCreateWindow()",
                                      description == nullptr ? "no info" : description) << std::endl;
 
         //destroy all remaining windows and cursors
