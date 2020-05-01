@@ -1,0 +1,21 @@
+# Default ignored files
+/ppgl/.idea/shelf/
+/ppgl/.idea/workspace.xml
+# Datasource local storage ignored files
+/ppgl/.idea/dataSources/
+/ppgl/.idea/dataSources.local.xml
+# Editor-based HTTP Client requests
+/ppgl/.idea/httpRequests/
+
+# Project exclude paths
+/ppgl/build/
+/ppgl_Test/build/
+
+# Default ignored files
+/ppgl_Test/.idea/shelf/
+/ppgl_Test/.idea/workspace.xml
+# Datasource local storage ignored files
+/ppgl_Test/.idea/dataSources/
+/ppgl_Test/.idea/dataSources.local.xml
+# Editor-based HTTP Client requests
+/ppgl_Test/.idea/httpRequests/
