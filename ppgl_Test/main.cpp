@@ -1,7 +1,12 @@
 #include <iostream>
 #include <ppgl.h>
 
+PPGL::Window window;
+
 int main() {
-    hello();
+
+    window.openWindow(600, 600, "test");
+
+    while(true){}
     return 0;
 }

@@ -3,7 +3,7 @@ project(ppgl)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES ppgl.cpp ppgl.h)
+set(SOURCE_FILES ppgl.h Window.cpp Window.h PPGL_Exception.h)
 
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
