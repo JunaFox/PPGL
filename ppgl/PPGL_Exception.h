@@ -36,7 +36,9 @@ namespace PPGL {
 
     ////////////////////////////////////////////////////////////////
     ///
+    /// \brief -
     /// \brief Represents a Pixel Perfect Game library exception
+    /// \brief -
     ///
     ////////////////////////////////////////////////////////////////
     class Exception : public std::exception {
@@ -44,7 +46,9 @@ namespace PPGL {
 
         ////////////////////////////////////////////////////////////////
         ///
+        /// \brief -
         /// \brief Constructor for a Pixel Perfect Game library exception
+        /// \brief -
         ///
         /// \param file_ The file name, where the exception happened
         /// \param line_ The line in the file, where the exception happened
@@ -66,7 +70,9 @@ namespace PPGL {
         const char *info;
     };
 
+    /// \brief -
     /// \brief Overload the << operator so exceptions can be easily outputted
+    /// \brief -
     inline std::ostream &operator << (std::ostream &out, const PPGL::Exception &c) {
         out << "\033[1;31m >Exception< " << "File: " << c.file << " | Line: " << c.line << " | Function: " << c.func
             << " | Info: " << c.info << "!!\033[0m" << std::endl;

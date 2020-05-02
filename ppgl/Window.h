@@ -40,7 +40,9 @@ namespace PPGL {
 
     ////////////////////////////////////////////////////////////////
     ///
+    /// \brief -
     /// \brief Stores the values for a glfw window
+    /// \brief -
     ///
     /// \param width The desired width, in screen coordinates, of the window. This must be greater than zero.
     /// \param height The desired height, in screen coordinates, of the window. This must be greater than zero.
@@ -58,28 +60,38 @@ namespace PPGL {
 
     ////////////////////////////////////////////////////////////////
     ///
+    /// \brief -
     /// \brief Represents a glfw window
+    /// \brief -
     ///
     ////////////////////////////////////////////////////////////////
     class Window {
     public:
+        //Constructor and destructor
         ////////////////////////////////////////////////////////////////
         ///
+        /// \brief -
         /// \brief Initializes the glfw library
+        /// \brief -
         ///
         ////////////////////////////////////////////////////////////////
         Window();
 
         ////////////////////////////////////////////////////////////////
         ///
-        /// \brief Terminates the glfw library
+        /// \brief -
+        /// \brief Closes the window and terminates the glfw library
+        /// \brief -
         ///
         ////////////////////////////////////////////////////////////////
         ~Window();
 
+        //Functions
         ////////////////////////////////////////////////////////////////
         ///
+        /// \brief -
         /// \brief Sets glfw window hint and creates glfw window
+        /// \brief -
         ///
         /// \param width The desired width, in screen coordinates, of the window. This must be greater than zero.
         /// \param height The desired height, in screen coordinates, of the window. This must be greater than zero.
@@ -90,7 +102,9 @@ namespace PPGL {
 
         ////////////////////////////////////////////////////////////////
         ///
+        /// \brief -
         /// \brief Sets glfw window hint and creates glfw window
+        /// \brief -
         ///
         /// \param windowDummy The desired values, of the glfw window
         /// \param hint The glfw window hint to set.
@@ -99,8 +113,33 @@ namespace PPGL {
         ////////////////////////////////////////////////////////////////
         void openWindow(WindowDummy &windowDummy, int hint, int value);
 
+        ////////////////////////////////////////////////////////////////
+        ///
+        /// \brief -
+        /// \brief Needs to be called as long as the window
+        /// \brief needs to process pending events.
+        /// \brief -
+        ///
+        /// \return bool
+        /// \return TRUE if window is open
+        /// \return FALSE if window is closed
+        ///
+        ////////////////////////////////////////////////////////////////
+        bool update();
+
     private:
+        //glfw window
         GLFWwindow* window;
+
+        //stores glfw error descriptions
+        const char *description = nullptr;
+
+        //stores PPGL exception
+        Exception *exception = nullptr;
+
+        //true if openWindow was called
+        //needed to show debug message (Window never opened)
+        bool windowShouldBeOpen = false;
 
     };
 }

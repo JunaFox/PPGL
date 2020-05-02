@@ -29,11 +29,9 @@
 #include "Window.h"
 
 PPGL::Window::Window() {
-    //stores glfw error descriptions
-    const char *description = nullptr;
-
     //Initialize the glfw library, if initialization fails throw exception
     if(!glfwInit()) {
+        //get glfw error description
         glfwGetError(&description);
         //Print exception
         std::cout << PPGL::Exception("Window.cpp", 36, "glfwInit()",
@@ -45,6 +43,8 @@ PPGL::Window::Window() {
 }
 
 PPGL::Window::~Window() {
+    //close window
+    glfwDestroyWindow(window);
     //Terminate the glfw library
     glfwTerminate();
 }
@@ -64,13 +64,15 @@ void PPGL::Window::openWindow(int width, int height, const char *title) {
 }
 
 void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
-    //stores glfw error descriptions
-    const char *description = nullptr;
+    //for debug message
+    windowShouldBeOpen = true;
 
     //set glfw window hints
     glfwWindowHint(hint, value);
-    //Check if hints got set properly
+
+    //get glfw error description
     glfwGetError(&description);
+    //Check if hints got set properly
     if(description != nullptr) {
         //Print exception
         std::cout << PPGL::Exception("Window.cpp", 71, "glfwWindowHint()", description) << std::endl;
@@ -84,6 +86,7 @@ void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
                               windowDummy.monitor, windowDummy.share);
     //Check if window got created properly
     if(!window) {
+        //get glfw error description
         glfwGetError(&description);
         //Print exception
         std::cout << PPGL::Exception("Window.cpp", 83, "glfwCreateWindow()",
@@ -94,4 +97,36 @@ void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
         //throw exception
         throw std::exception();
     }
+}
+
+bool PPGL::Window::update() {
+
+    //check if windowOpen got called before update and throw exception if not
+    if(!windowShouldBeOpen) {
+        std::cout << PPGL::Exception("Window.cpp", 123, "",
+                                    "Window was never opened. Call openWindow before update");
+        throw std::exception();
+    }
+
+    //check if window is open
+    if(!glfwWindowShouldClose(window)) {
+        //process events that are already in the event queue
+        glfwPollEvents();
+        //check for errors in Event poll
+        glfwGetError(&description);
+        if(description != nullptr)
+            exception = new PPGL::Exception("Window.cpp", 106, "glfwPollEvents()", description);
+
+        //prints and throws error
+        if(exception != nullptr) {
+            std::cout << exception;
+            throw std::exception();
+        }
+
+        //return true
+        return true;
+    }
+
+    //if window is closed
+    return false;
 }

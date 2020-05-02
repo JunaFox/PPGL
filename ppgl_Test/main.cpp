@@ -1,12 +1,13 @@
 #include <iostream>
 #include <ppgl.h>
 
-PPGL::Window window;
-
 int main() {
-
+    PPGL::Window window;
     window.openWindow(600, 600, "test");
 
-    while(true){}
+    while(window.update()){
+
+    }
+
     return 0;
 }
