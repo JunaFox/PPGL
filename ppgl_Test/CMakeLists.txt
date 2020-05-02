@@ -7,7 +7,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 set(SOURCE_FILES main.cpp)
 
-add_executable(ppgl_Test ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 #Link to PPGL library
 include(FindPkgConfig)
