@@ -74,7 +74,7 @@ namespace PPGL {
     /// \brief Overload the << operator so exceptions can be easily outputted
     /// \brief -
     inline std::ostream &operator << (std::ostream &out, const PPGL::Exception &c) {
-        out << "\033[1;31m >Exception< " << "File: " << c.file << " | Line: " << c.line << " | Function: " << c.func
+        out << "\033[1;31m >PPGL Exception< " << "File: " << c.file << " | Line: " << c.line << " | Function: " << c.func
             << " | Info: " << c.info << "!!\033[0m" << std::endl;
         return out;
     }

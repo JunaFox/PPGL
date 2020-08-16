@@ -31,5 +31,6 @@
  */
 
 #include "Window.h"
+#include "Vulkan.h"
 
 #endif //PPGL_PPGL_H

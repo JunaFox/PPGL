@@ -34,11 +34,11 @@ PPGL::Window::Window() {
         //get glfw error description
         glfwGetError(&description);
         //Print exception
-        std::cout << PPGL::Exception("Window.cpp", 36, "glfwInit()",
+        std::cout << PPGL::Exception("Window.cpp", 33, "glfwInit()",
                                      description == nullptr ? "no info" : description) << std::endl;
 
         //throw exception
-        throw std::exception();
+        throw std::runtime_error(description == nullptr ? "glfwInit() failed" : description);
      }
 }
 
@@ -47,6 +47,22 @@ PPGL::Window::~Window() {
     glfwDestroyWindow(window);
     //Terminate the glfw library
     glfwTerminate();
+}
+
+void PPGL::Window::addWindowHint(int hint, int value) {
+    //set glfw window hints
+    glfwWindowHint(hint, value);
+
+    //get glfw error description
+    glfwGetError(&description);
+    //Check if hints got set properly
+    if(description != nullptr) {
+        //Print exception
+        std::cout << PPGL::Exception("Window.cpp", 54, "glfwWindowHint()", description) << std::endl;
+
+        //throw exception
+        throw std::runtime_error(description == nullptr ? "glfwWindowHint() failed" : description);
+    }
 }
 
 void PPGL::Window::openWindow(int width, int height, const char *title) {
@@ -58,29 +74,14 @@ void PPGL::Window::openWindow(int width, int height, const char *title) {
             nullptr,
             nullptr
     };
+    //adds glfw window hints to window
+    addWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
     //pass information to open Window
-    openWindow(windowDummy, GLFW_CLIENT_API, GLFW_NO_API);
+    openWindow(windowDummy);
 }
 
-void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
-    //for debug message
-    windowShouldBeOpen = true;
-
-    //set glfw window hints
-    glfwWindowHint(hint, value);
-
-    //get glfw error description
-    glfwGetError(&description);
-    //Check if hints got set properly
-    if(description != nullptr) {
-        //Print exception
-        std::cout << PPGL::Exception("Window.cpp", 71, "glfwWindowHint()", description) << std::endl;
-
-        //throw exception
-        throw std::exception();
-    }
-
+void PPGL::Window::openWindow(WindowDummy &windowDummy) {
     //creat window
     window = glfwCreateWindow(windowDummy.width, windowDummy.height, windowDummy.title,
                               windowDummy.monitor, windowDummy.share);
@@ -89,24 +90,17 @@ void PPGL::Window::openWindow(WindowDummy &windowDummy, int hint, int value) {
         //get glfw error description
         glfwGetError(&description);
         //Print exception
-        std::cout << PPGL::Exception("Window.cpp", 83, "glfwCreateWindow()",
+        std::cout << PPGL::Exception("Window.cpp", 89, "glfwCreateWindow()",
                                      description == nullptr ? "no info" : description) << std::endl;
 
         //destroy all remaining windows and cursors
         glfwTerminate();
         //throw exception
-        throw std::exception();
+        throw std::runtime_error("Window was never opened!");
     }
 }
 
 bool PPGL::Window::update() {
-
-    //check if windowOpen got called before update and throw exception if not
-    if(!windowShouldBeOpen) {
-        std::cout << PPGL::Exception("Window.cpp", 123, "",
-                                    "Window was never opened. Call openWindow before update");
-        throw std::exception();
-    }
 
     //check if window is open
     if(!glfwWindowShouldClose(window)) {
@@ -114,13 +108,15 @@ bool PPGL::Window::update() {
         glfwPollEvents();
         //check for errors in Event poll
         glfwGetError(&description);
-        if(description != nullptr)
-            exception = new PPGL::Exception("Window.cpp", 106, "glfwPollEvents()", description);
-
-        //prints and throws error
-        if(exception != nullptr) {
-            std::cout << exception;
-            throw std::exception();
+        if(description != nullptr) {
+            exception = new PPGL::Exception("Window.cpp", 120, "glfwPollEvents()", description);
+            //prints and throws error
+            if (exception != nullptr) {
+                std::cout << exception;
+                //destroy all remaining windows and cursors
+                glfwTerminate();
+                throw std::runtime_error(description == nullptr ? "no info" : description);;
+            }
         }
 
         //return true

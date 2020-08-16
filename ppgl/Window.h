@@ -29,7 +29,7 @@
 /*
  * Headers
  */
-#include <vulkan/vulkan.h>
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
@@ -90,7 +90,19 @@ namespace PPGL {
         ////////////////////////////////////////////////////////////////
         ///
         /// \brief -
-        /// \brief Sets glfw window hint and creates glfw window
+        /// \brief Sets glfw window hint, hints need to be set before call of openWindow
+        /// \brief -
+        ///
+        /// \param hint The glfw window hint to set.
+        /// \param value The new value of the glfw window hint
+        ///
+        ////////////////////////////////////////////////////////////////
+        void addWindowHint(int hint, int value);
+
+        ////////////////////////////////////////////////////////////////
+        ///
+        /// \brief -
+        /// \brief Creates glfw window
         /// \brief -
         ///
         /// \param width The desired width, in screen coordinates, of the window. This must be greater than zero.
@@ -107,11 +119,9 @@ namespace PPGL {
         /// \brief -
         ///
         /// \param windowDummy The desired values, of the glfw window
-        /// \param hint The glfw window hint to set.
-        /// \param value The new value of the glfw window hint
         ///
         ////////////////////////////////////////////////////////////////
-        void openWindow(WindowDummy &windowDummy, int hint, int value);
+        void openWindow(WindowDummy &windowDummy);
 
         ////////////////////////////////////////////////////////////////
         ///
@@ -136,10 +146,6 @@ namespace PPGL {
 
         //stores PPGL exception
         Exception *exception = nullptr;
-
-        //true if openWindow was called
-        //needed to show debug message (Window never opened)
-        bool windowShouldBeOpen = false;
 
     };
 }
