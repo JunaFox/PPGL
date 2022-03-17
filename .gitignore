@@ -28,3 +28,10 @@
 /.idea/dataSources.local.xml
 # Editor-based HTTP Client requests
 /.idea/httpRequests/
+
+cmake-build-debug
+ppgl/cmake-build-debug
+ppgl/cmake-build-release
+ppgl_Test/cmake-build-debug
+
+.idea

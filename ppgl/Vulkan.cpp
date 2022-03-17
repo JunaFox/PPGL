@@ -23,7 +23,8 @@
  * -----------------------------------------------------------------------------------------
  */
 
-#include "Vulkan.h"
+#include <vulkan/vulkan.h>
+#include "ppgl.h"
 
 PPGL::Vulkan::Vulkan() {
     //Check for vulkan support, if not supported exception
